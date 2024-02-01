@@ -6,4 +6,4 @@ float gemiddelde_cijfer = 0;
 gemiddelde_cijfer = (cijfer1+cijfer2+cijfer3)/3;
 
 
-print(gemiddelde_cijfer);
+println(round(gemiddelde_cijfer*10.0)/10.0);
