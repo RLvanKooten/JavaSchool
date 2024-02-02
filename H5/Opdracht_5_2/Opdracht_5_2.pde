@@ -1,5 +1,5 @@
 String tekst_variabel = "Wat lang zeg!";
-String spatie = " ";
-int lengte = 5;
+int lengte = 190;
+tekst_variabel = lengte+" "+"cm"+" "+tekst_variabel;
 
-println(lengte+spatie+tekst_variabel);
+println(tekst_variabel);
