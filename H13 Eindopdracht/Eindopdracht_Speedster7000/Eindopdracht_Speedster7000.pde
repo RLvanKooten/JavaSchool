@@ -68,7 +68,7 @@ void draw() {
 }
 
 
-/*Methodes / Functies*/
+/*Methodes*/
 void keyPressed() {
   if (keyCode == UP) {
     Auto1.PijltjeOmhoog = true;
@@ -98,7 +98,7 @@ void keyReleased() {
 
 void StartGame() {
   
-  Auto1.teken();// tekenen auto
+  Auto1.teken();
   Auto1.beweeg(Auto1.PijltjeOmhoog, Auto1.PijltjeOmlaag, Auto1.PijltjeLinks, Auto1.PijltjeRechts);// besturen aut
   Auto1.ApplicatieLimietDetectie();
   
@@ -120,7 +120,6 @@ void StartGame() {
 
   
   //collision checken
-  
   if (CheckCollision(Auto1, Object1) || CheckCollision(Auto1, Object2) || CheckCollision(Auto1, Object3) || CheckCollision(Auto1, Object4)) {
     lives -= 1;
     Object1.ResetObject();
