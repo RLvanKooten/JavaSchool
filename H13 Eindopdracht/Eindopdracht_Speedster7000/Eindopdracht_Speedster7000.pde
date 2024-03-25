@@ -4,39 +4,26 @@ ControlP5 cp;
 
 PImage BackgroundImg;
 PImage PlayerAuto;
-PImage obstakel1;
-PImage obstakel2;
-PImage obstakel3;
-PImage obstakel4;
-
 int lives = 3;
 boolean Doorgaan = true;
 
-
 int Score;
 int VorigUpdateTijd = 0;
-int IntervalUpdateScore = 250; 
-
-
+int IntervalUpdateScore = 250;
 
 Button ResetKnop;
 SpelerAuto Auto1;
-TeOntwijkenObjecten Object1;
-TeOntwijkenObjecten Object2;
-TeOntwijkenObjecten Object3;
-TeOntwijkenObjecten Object4;
-TeOntwijkenObjecten Object5;
+TeOntwijkenObjecten[] object = new TeOntwijkenObjecten[5];
 
 
 void setup() {
   size(700, 700);
   cp = new ControlP5(this);
   Auto1 = new SpelerAuto();
-  Object1 = new TeOntwijkenObjecten();
-  Object2 = new TeOntwijkenObjecten();
-  Object3 = new TeOntwijkenObjecten();
-  Object4 = new TeOntwijkenObjecten();
-  Object5 = new TeOntwijkenObjecten();
+  for (int i = 0; i<object.length; i++) {
+    object[i] =  new TeOntwijkenObjecten();
+  }
+
 
   BackgroundImg = loadImage("BackgroundSpeedster.png");
   PlayerAuto = loadImage("AutoSpeler.png");
@@ -97,44 +84,33 @@ void keyReleased() {
 
 
 void StartGame() {
-  
+
   Auto1.teken();
   Auto1.beweeg(Auto1.PijltjeOmhoog, Auto1.PijltjeOmlaag, Auto1.PijltjeLinks, Auto1.PijltjeRechts);// besturen aut
   Auto1.ApplicatieLimietDetectie();
-  
-  Object1.ObjectTekenen();
-  Object1.ObjectenBewegen();
-  
-  Object2.ObjectTekenen();
-  Object2.ObjectenBewegen();
-  
-  Object3.ObjectTekenen();
-  Object3.ObjectenBewegen();
-  
-  Object4.ObjectTekenen();
-  Object4.ObjectenBewegen();
-  
-  Object5.ObjectTekenen();
-  Object5.ObjectenBewegen();
+
+  for (int i = 0; i<object.length; i++) {
+    object[i].ObjectTekenen();
+    object[i].ObjectenBewegen();
+  }
   infoScherm();
 
-  
-  
-  if (CheckCollision(Auto1, Object1) || CheckCollision(Auto1, Object2) || CheckCollision(Auto1, Object3) || CheckCollision(Auto1, Object4)) {
-    lives -= 1;
-    Object1.ResetObject();
-    Object2.ResetObject();
-    Object3.ResetObject();
-    Object4.ResetObject();
-    Object5.ResetObject();
-    Auto1.ResetAuto();
+  for (int i =  0; i<object.length; i++) {
+    if (CheckCollision(Auto1, object[i])) {
+      lives -= 1;
+      object[0].ResetObject();
+      object[1].ResetObject();
+      object[2].ResetObject();
+      object[3].ResetObject();
+      object[4].ResetObject();
+      Auto1.ResetAuto();
+    }
   }
 
-  
   for (int i = 0; i<=lives; i++) {
     if (millis() - VorigUpdateTijd >= IntervalUpdateScore) {
-      VorigUpdateTijd = millis(); 
-      Score += 50; 
+      VorigUpdateTijd = millis();
+      Score += 50;
     }
   }
 }
@@ -149,8 +125,6 @@ boolean CheckCollision(SpelerAuto auto, TeOntwijkenObjecten object) {
   }
 }
 
-
-
 void infoScherm() {
   fill(255);
   rect(550, 0, 150, 100);
@@ -160,8 +134,6 @@ void infoScherm() {
   text("Score: "+Score, 570, 40);
   text("Lives left: "+ lives, 570, 70);
 }
-
-
 
 void GameOverScherm() {
   fill(255);
