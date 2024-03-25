@@ -18,14 +18,14 @@ class SpelerAuto {
   int HoogteHitbox = 132;
 
 
-  // Methode om de auto te tekenen
+  
   void teken() {
     rect(xWaardeHitbox, yWaardeHitbox, BreedteHitbox, HoogteHitbox);
     noFill();
     image(PlayerAuto, xWaardePlayerAuto, yWaardePlayerAuto, BreedtePlayerAuto, HoogtePlayerAuto);
   }
 
-  // Methode om de auto te laten bewegen
+  
   void beweeg(boolean omhoog, boolean omlaag, boolean links, boolean rechts) {
     if (omhoog) {
       yWaardePlayerAuto -= stap;

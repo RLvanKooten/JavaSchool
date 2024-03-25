@@ -12,13 +12,13 @@ PImage obstakel4;
 int lives = 3;
 boolean Doorgaan = true;
 
-//variabelen score en tijd
+
 int Score;
 int VorigUpdateTijd = 0;
 int IntervalUpdateScore = 250; 
 
 
-//initialisering van knop en objecen
+
 Button ResetKnop;
 SpelerAuto Auto1;
 TeOntwijkenObjecten Object1;
@@ -119,7 +119,7 @@ void StartGame() {
   infoScherm();
 
   
-  //collision checken
+  
   if (CheckCollision(Auto1, Object1) || CheckCollision(Auto1, Object2) || CheckCollision(Auto1, Object3) || CheckCollision(Auto1, Object4)) {
     lives -= 1;
     Object1.ResetObject();
@@ -130,16 +130,16 @@ void StartGame() {
     Auto1.ResetAuto();
   }
 
-  //Score updaten zolang de lives boven nul zijn.
+  
   for (int i = 0; i<=lives; i++) {
     if (millis() - VorigUpdateTijd >= IntervalUpdateScore) {
-      VorigUpdateTijd = millis(); // Update de laatste tijd waarop de score is bijgewerkt
-      Score += 50; // Voeg score toe
+      VorigUpdateTijd = millis(); 
+      Score += 50; 
     }
   }
 }
 
-//methode om te checken of er een collision is tussen de spelerobject en de obstakels
+
 boolean CheckCollision(SpelerAuto auto, TeOntwijkenObjecten object) {
   if (auto.xWaardeHitbox + auto.BreedteHitbox >= object.xWaardeHitbox && object.xWaardeHitbox + object.BreedteHitbox >= auto.xWaardeHitbox
     && auto.yWaardeHitbox + auto.HoogteHitbox >= object.yWaardeHitbox && object.yWaardeHitbox + object.HoogteHitbox >= auto.yWaardeHitbox) {
@@ -150,7 +150,7 @@ boolean CheckCollision(SpelerAuto auto, TeOntwijkenObjecten object) {
 }
 
 
-//info scherm waar je lives en score worden weergegeven.
+
 void infoScherm() {
   fill(255);
   rect(550, 0, 150, 100);
@@ -162,7 +162,7 @@ void infoScherm() {
 }
 
 
-// Popup die wordt weergegeven als je levens op zijn.
+
 void GameOverScherm() {
   fill(255);
   rect(200, 350, 300, 200);
@@ -177,7 +177,7 @@ void GameOverScherm() {
   ResetKnop.show();
 }
 
-//Knop om spel te herstarten
+
 void ResetKnop() {
   Doorgaan = true;
   Auto1.ResetAuto();
